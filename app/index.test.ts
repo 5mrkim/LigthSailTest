@@ -4,8 +4,9 @@ import * as redis from "redis";
 const LIST_KEY = "messages";
 let app: Express.Application;
 let client: ReidsClient;
+const REIDS_URL = "redis://default:test_env@localhost:6380";
 beforeAll(async () => {
-  client = redis.createClient({ url: "redis://localhost:6379" });
+  client = redis.createClient({ url: REIDS_URL });
   await client.connect();
   app = await createApp(client);
 });

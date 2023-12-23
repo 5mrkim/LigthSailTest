@@ -31,17 +31,23 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
+const dotenv_1 = __importDefault(require("dotenv"));
 const redis = __importStar(require("redis"));
 const app_1 = require("./app");
-const port = 3200;
-const LIST_KEY = "messages";
+dotenv_1.default.config();
+const { PORT, REDIS_URL } = process.env;
+if (!PORT || REDIS_URL)
+    throw new Error("PORT or REDIS_URL is required");
 const startServer = () => __awaiter(void 0, void 0, void 0, function* () {
-    const client = redis.createClient({ url: "redis://localhost:6379" });
+    const client = redis.createClient({ url: REDIS_URL });
     yield client.connect();
     const app = (0, app_1.createApp)(client);
-    app.listen(port, () => {
-        console.log(`App listening on port ${port}`);
+    app.listen(PORT, () => {
+        console.log(`App listening on port ${PORT}`);
     });
 });
 startServer();
