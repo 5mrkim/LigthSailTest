@@ -1,0 +1,19 @@
+FROM node:18
+
+WORKDIR /usr/src/my-app
+
+RUN npm install -g nodemon
+
+COPY package*.json ./
+
+RUN npm install
+
+COPY . . 
+
+RUN npm run build
+
+CMD ["npm","run","dev"]
+
+
+# docker build -t express-dev -f Dockerfile.dev .
+# docker run  -it -p 3200:3200 --env-file .env -v $(pwd)/app:/user/src/my-app/app express-dev
