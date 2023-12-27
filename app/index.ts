@@ -13,7 +13,7 @@ const startServer = async () => {
   const app = createApp(client);
 
   const server = app.listen(PORT, () => {
-    console.log(`App listening on port! ${PORT} 123!`);
+    console.log(`App listening on port! ${PORT} 123! new version~~@@`);
     console.log("test!");
   });
   return server;
