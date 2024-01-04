@@ -40,6 +40,8 @@ const redis = __importStar(require("redis"));
 const app_1 = require("./app");
 dotenv_1.default.config();
 const { PORT, REDIS_URL } = process.env;
+console.log("PORT", PORT);
+console.log("REDIS", REDIS_URL);
 if (!PORT || REDIS_URL)
     throw new Error("PORT or REDIS_URL is required");
 const startServer = () => __awaiter(void 0, void 0, void 0, function* () {
